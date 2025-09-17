@@ -1,0 +1,24 @@
+{
+  "parent": "brassworksmissions:missions_50",
+  "display": {
+    "icon": {
+      "id": "numismatics:sprocket"
+    },
+    "title": {
+      "translate": "advancements.brassworksmissions.missions_100.title"
+    },
+    "description": {
+      "translate": "advancements.brassworksmissions.missions_100.description"
+    },
+    "frame": "goal"
+  },
+  "rewards": {
+    "experience": 250
+  },
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}
+

@@ -1,0 +1,24 @@
+{
+  "parent": "brassworksmissions:missions_10",
+  "display": {
+    "icon": {
+      "id": "numismatics:bevel"
+    },
+    "title": {
+      "translate": "advancements.brassworksmissions.missions_50.title"
+    },
+    "description": {
+      "translate": "advancements.brassworksmissions.missions_50.description"
+    },
+    "frame": "task"
+  },
+  "rewards": {
+    "experience": 100
+  },
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}
+

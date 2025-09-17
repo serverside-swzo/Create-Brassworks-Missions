@@ -1,0 +1,24 @@
+{
+  "parent": "brassworksmissions:root",
+  "display": {
+    "icon": {
+      "id": "numismatics:spur"
+    },
+    "title": {
+      "translate": "advancements.brassworksmissions.missions_10.title"
+    },
+    "description": {
+      "translate": "advancements.brassworksmissions.missions_10.description"
+    },
+    "frame": "task"
+  },
+  "rewards": {
+    "experience": 50
+  },
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}
+

@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "create:schedule"
+    },
+    "title": {
+      "translate": "advancements.brassworksmissions.root.title"
+    },
+    "description": {
+      "translate": "advancements.brassworksmissions.root.description"
+    },
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "parent": "brassworksmissions:missions_100",
+  "display": {
+    "icon": {
+      "id": "numismatics:cog"
+    },
+    "title": {
+      "translate": "advancements.brassworksmissions.missions_250.title"
+    },
+    "description": {
+      "translate": "advancements.brassworksmissions.missions_250.description"
+    },
+    "frame": "goal"
+  },
+  "rewards": {
+    "experience": 500
+  },
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}
+
