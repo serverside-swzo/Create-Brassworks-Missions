@@ -103,22 +103,22 @@ public class UiScreenRenderHelper {
 
         if (hours > 0) {
             component.append(Component.literal(String.valueOf(hours)).withStyle(valueStyle));
-            component.append(Component.literal("h").withStyle(suffixStyle));
+            component.append(Component.literal(Component.translatable("gui.brassworksmissions.ui.timer.hour.singular").getString()).withStyle(suffixStyle));
             component.append(" ");
             component.append(Component.literal(String.valueOf(minutes)).withStyle(valueStyle));
-            component.append(Component.literal("m").withStyle(suffixStyle));
+            component.append(Component.literal(Component.translatable("gui.brassworksmissions.ui.timer.minute.singular").getString()).withStyle(suffixStyle));
             component.append(" ");
             component.append(Component.literal(String.valueOf(seconds)).withStyle(valueStyle));
-            component.append(Component.literal("s").withStyle(suffixStyle));
+            component.append(Component.literal(Component.translatable("gui.brassworksmissions.ui.timer.second.singular").getString()).withStyle(suffixStyle));
         } else if (minutes > 0) {
             component.append(Component.literal(String.valueOf(minutes)).withStyle(valueStyle));
-            component.append(Component.literal("m").withStyle(suffixStyle));
+            component.append(Component.literal(Component.translatable("gui.brassworksmissions.ui.timer.minute.singular").getString()).withStyle(suffixStyle));
             component.append(" ");
             component.append(Component.literal(String.valueOf(seconds)).withStyle(valueStyle));
-            component.append(Component.literal("s").withStyle(suffixStyle));
+            component.append(Component.literal(Component.translatable("gui.brassworksmissions.ui.timer.second.singular").getString()).withStyle(suffixStyle));
         } else {
             component.append(Component.literal(String.valueOf(seconds)).withStyle(valueStyle));
-            component.append(Component.literal("s").withStyle(suffixStyle));
+            component.append(Component.literal(Component.translatable("gui.brassworksmissions.ui.timer.second.singular").getString()).withStyle(suffixStyle));
         }
 
         return component;
@@ -145,7 +145,7 @@ public class UiScreenRenderHelper {
 
         if (hours > 0) {
             timeComponent.append(Component.literal(String.valueOf(hours)).withStyle(valueStyle));
-            timeComponent.append(Component.literal(" hours").withStyle(suffixStyle));
+            timeComponent.append(Component.literal("" + Component.translatable("gui.brassworksmissions.ui.timer.hour").getString()).withStyle(suffixStyle));
             needsSeparator = true;
         }
 
@@ -155,7 +155,7 @@ public class UiScreenRenderHelper {
                 timeComponent.append(Component.literal(", ").withStyle(suffixStyle));
             }
             timeComponent.append(Component.literal(String.valueOf(minutes)).withStyle(valueStyle));
-            timeComponent.append(Component.literal(" minutes").withStyle(suffixStyle));
+            timeComponent.append(Component.literal("" + Component.translatable("gui.brassworksmissions.ui.timer.minute").getString()).withStyle(suffixStyle));
             needsSeparator = true;
         }
 
@@ -164,7 +164,7 @@ public class UiScreenRenderHelper {
                 timeComponent.append(Component.literal(", ").withStyle(suffixStyle));
             }
             timeComponent.append(Component.literal(String.valueOf(seconds)).withStyle(valueStyle));
-            timeComponent.append(Component.literal(" seconds").withStyle(suffixStyle));
+            timeComponent.append(Component.literal("" + Component.translatable("gui.brassworksmissions.ui.timer.second").getString()).withStyle(suffixStyle));
         }
 
         if (!timeComponent.getContents().equals(Component.empty())) {

@@ -63,8 +63,8 @@ public class MissionController {
                 data.setMission(i, missionTemplate.createInstance(random));
             }
         }
-
-        player.getData(BrassworksmissionsModVariables.PLAYER_VARIABLES).syncPlayerVariables(player);
+        playerVariables.trackedMissions.clear();
+        playerVariables.syncPlayerVariables(player);
     }
 
     public static void rerollMission(ServerPlayer player, int slot) {

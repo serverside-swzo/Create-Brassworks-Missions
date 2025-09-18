@@ -23,6 +23,12 @@
   "gui.brassworksmissions.ui.select_mission": "Select Mission",
   "gui.brassworksmissions.ui.reset_timer_prefix": "Resets in: ",
   "gui.brassworksmissions.ui.reset_tooltip_title": "Weekly Mission Reset",
+  "gui.brassworksmissions.ui.timer.minute": "minutes",
+  "gui.brassworksmissions.ui.timer.hour": "hours",
+  "gui.brassworksmissions.ui.timer.second": "seconds",
+  "gui.brassworksmissions.ui.timer.second.singular": "s",
+  "gui.brassworksmissions.ui.timer.minute.singular": "m",
+  "gui.brassworksmissions.ui.timer.hour.singular": "h",
   "key.brassworksmissions.open_missions_ui": "Open Missions UI",
   "key.category.brassworksmissions": "Brassworks Missions",
 
