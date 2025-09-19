@@ -131,7 +131,12 @@ public class MissionUIHelper {
         Component amountComponent = Component.literal(String.valueOf(mission.getRequiredAmount()))
                 .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(DESCRIPTION_AMOUNT_COLOR)));
 
-        MutableComponent description = verbComponent.copy().append(punctuationComponent).append(amountComponent);
+        MutableComponent description = verbComponent.copy().append(punctuationComponent);
+        Component prefixComponent = Component.translatable("gui.brassworksmissions.ui.amount_prefix");
+        if (!prefixComponent.getString().trim().isEmpty()) {
+            description.append("").append(prefixComponent.copy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(DESCRIPTION_VERB_COLOR))));
+        }
+        description.append("").append(amountComponent);
 
         boolean isComplete = mission.getProgress() >= mission.getRequiredAmount();
         int nounColor = isComplete ? COMPLETED_TITLE_COLOR : DESCRIPTION_ITEM_COLOR;
