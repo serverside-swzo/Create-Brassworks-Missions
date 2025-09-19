@@ -16,11 +16,7 @@ import net.swzo.brassworksmissions.init.CustomStats;
 import net.swzo.brassworksmissions.network.BrassworksmissionsModVariables;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class MissionController {
 

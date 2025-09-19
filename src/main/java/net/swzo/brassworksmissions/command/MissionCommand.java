@@ -11,7 +11,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.swzo.brassworksmissions.missions.MissionController;
-import net.swzo.brassworksmissions.procedures.OpenMissionsUI;
+import net.swzo.brassworksmissions.util.OpenMissionsUI;
 
 @EventBusSubscriber
 public class MissionCommand {

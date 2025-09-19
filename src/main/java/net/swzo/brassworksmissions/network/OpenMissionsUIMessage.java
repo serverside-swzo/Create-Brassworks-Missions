@@ -10,7 +10,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.swzo.brassworksmissions.BrassworksmissionsMod;
-import net.swzo.brassworksmissions.procedures.OpenMissionsUI;
+import net.swzo.brassworksmissions.util.OpenMissionsUI;
 
 @EventBusSubscriber
 public record OpenMissionsUIMessage() implements CustomPacketPayload {

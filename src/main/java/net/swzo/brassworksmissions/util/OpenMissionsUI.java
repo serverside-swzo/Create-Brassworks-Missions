@@ -1,4 +1,4 @@
-package net.swzo.brassworksmissions.procedures;
+package net.swzo.brassworksmissions.util;
 
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
@@ -17,9 +17,9 @@ public class OpenMissionsUI {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		if (entity instanceof ServerPlayer _ent) {
-			BlockPos _bpos = BlockPos.containing(x, y, z);
-			_ent.openMenu(new MenuProvider() {
+		if (entity instanceof ServerPlayer serverPlayer) {
+			BlockPos blockPos = BlockPos.containing(x, y, z);
+			serverPlayer.openMenu(new MenuProvider() {
 				@Override
 				public Component getDisplayName() {
 					return Component.literal("Ui");
@@ -32,9 +32,9 @@ public class OpenMissionsUI {
 
 				@Override
 				public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-					return new UiMenu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(_bpos));
+					return new UiMenu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(blockPos));
 				}
-			}, _bpos);
+			}, blockPos);
 		}
 	}
 }

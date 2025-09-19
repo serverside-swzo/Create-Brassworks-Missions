@@ -17,7 +17,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.swzo.brassworksmissions.BrassworksmissionsMod;
 import net.swzo.brassworksmissions.missions.MissionController;
-import net.swzo.brassworksmissions.procedures.CloseMissionsUI;
+import net.swzo.brassworksmissions.util.CloseMissionsUI;
 
 @EventBusSubscriber
 public record UiButtonMessage(int buttonID, int x, int y, int z, int slot) implements CustomPacketPayload {
