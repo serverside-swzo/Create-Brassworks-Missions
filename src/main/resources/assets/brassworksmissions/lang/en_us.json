@@ -46,6 +46,7 @@
   "gui.brassworksmissions.tooltip.cost_cap": "Cost caps at 32 %s",
   "gui.brassworksmissions.tooltip.not_enough": "You do not have enough %s!",
   "gui.brassworksmissions.ui.plural_format": "(s)",
+  "gui.brassworksmissions.ui.of": "",
   "gui.brassworksmissions.error.completed_mission": "You cannot reroll a completed mission.",
   "gui.brassworksmissions.error.cost_cap_reached": "Your reroll cost has reached its cap of 32 %s. You can no longer reroll.",
   "gui.brassworksmissions.error.not_enough": "You need %s %s to reroll this mission.",

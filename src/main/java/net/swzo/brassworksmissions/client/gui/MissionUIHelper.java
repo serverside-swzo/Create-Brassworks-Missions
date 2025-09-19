@@ -161,6 +161,10 @@ public class MissionUIHelper {
             nounComponent = pluralNameComponent.copy()
                     .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(nounColor)));
         }
+        Component ofComponent = Component.translatable("gui.brassworksmissions.ui.of");
+        if (!ofComponent.getString().trim().isEmpty()) {
+            description.append(" ").append(ofComponent.copy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(DESCRIPTION_VERB_COLOR))));
+        }
         description.append(" ").append(nounComponent);
 
         if (SUFFIX_VERBS.containsKey(missionType)) {
