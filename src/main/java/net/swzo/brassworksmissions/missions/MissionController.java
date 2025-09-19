@@ -16,7 +16,11 @@ import net.swzo.brassworksmissions.init.CustomStats;
 import net.swzo.brassworksmissions.network.BrassworksmissionsModVariables;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class MissionController {
 
@@ -53,16 +57,67 @@ public class MissionController {
         RandomSource random = player.getRandom();
         BrassworksmissionsModVariables.PlayerVariables playerVariables = player.getData(BrassworksmissionsModVariables.PLAYER_VARIABLES);
         playerVariables.reRollAmount = 1;
-        playerVariables.syncPlayerVariables(player);
+        Set<String> assignedMissionIds = new HashSet<>();
+        List<Mission> missionsToAssign = new ArrayList<>();
 
-        for (int i = 0; i < PlayerMissionData.MISSION_SLOTS; i++) {
-            Mission missionTemplate = BrassworksmissionsMod.getMissionManager().getWeightedRandomMission(random);
-            if (missionTemplate != null) {
-                data.setMission(i, missionTemplate.createInstance(random));
+        int attempts = 0;
+        int maxAttempts = PlayerMissionData.MISSION_SLOTS * 20;
+
+        while (missionsToAssign.size() < PlayerMissionData.MISSION_SLOTS && attempts < maxAttempts) {
+            Mission potentialMission = BrassworksmissionsMod.getMissionManager().getWeightedRandomMission(random);
+
+            if (potentialMission != null) {
+                if (!assignedMissionIds.contains(potentialMission.getId())) {
+                    missionsToAssign.add(potentialMission);
+                    assignedMissionIds.add(potentialMission.getId());
+                }
             }
+            attempts++;
         }
+
+        for (int i = 0; i < missionsToAssign.size(); i++) {
+            Mission missionTemplate = missionsToAssign.get(i);
+            data.setMission(i, missionTemplate.createInstance(random));
+        }
+
+        if (missionsToAssign.size() < PlayerMissionData.MISSION_SLOTS) {
+            BrassworksmissionsMod.LOGGER.warn("Could not find enough unique missions for player {}. Filled {} of {} slots.",
+                    player.getName().getString(), missionsToAssign.size(), PlayerMissionData.MISSION_SLOTS);
+        }
+
         playerVariables.trackedMissions.clear();
         playerVariables.syncPlayerVariables(player);
+    }
+
+    @Nullable
+    private static Mission findUniqueMissionForSlot(Player player, int excludedSlot, RandomSource random) {
+        PlayerMissionData data = getMissionData(player);
+        if (data == null) {
+            return null;
+        }
+
+        Set<String> existingMissionIds = new HashSet<>();
+        for (int i = 0; i < PlayerMissionData.MISSION_SLOTS; i++) {
+            if (i == excludedSlot) continue;
+            ActiveMission mission = data.getMission(i);
+            if (mission != null) {
+                existingMissionIds.add(mission.getMissionType());
+            }
+        }
+
+        int attempts = 0;
+        int maxAttempts = 20;
+
+        while (attempts < maxAttempts) {
+            Mission potentialMission = BrassworksmissionsMod.getMissionManager().getWeightedRandomMission(random);
+            if (potentialMission != null && !existingMissionIds.contains(potentialMission.getId())) {
+                return potentialMission;
+            }
+            attempts++;
+        }
+
+        BrassworksmissionsMod.LOGGER.warn("Could not find a unique mission to reroll for player {} after {} attempts. A non-unique mission may be assigned.", player.getName().getString(), maxAttempts);
+        return BrassworksmissionsMod.getMissionManager().getWeightedRandomMission(random);
     }
 
     public static void rerollMission(ServerPlayer player, int slot) {
@@ -109,7 +164,7 @@ public class MissionController {
             return;
         }
         RandomSource random = player.getRandom();
-        Mission missionTemplate = BrassworksmissionsMod.getMissionManager().getWeightedRandomMission(random);
+        Mission missionTemplate = findUniqueMissionForSlot(player, slot, random);
         if (missionTemplate != null) {
             data.setMission(slot, missionTemplate.createInstance(random));
             playerVariables.syncPlayerVariables(player);
@@ -123,7 +178,7 @@ public class MissionController {
         }
 
         RandomSource random = player.getRandom();
-        Mission missionTemplate = BrassworksmissionsMod.getMissionManager().getWeightedRandomMission(random);
+        Mission missionTemplate = findUniqueMissionForSlot(player, slot, random);
         if (missionTemplate != null) {
             data.setMission(slot, missionTemplate.createInstance(random));
 
@@ -231,8 +286,6 @@ public class MissionController {
             if (completedMissions >= requiredCount) {
                 AdvancementHolder advancement = player.server.getAdvancements().get(advancementId);
                 if (advancement != null) {
-                    // Award all criteria for the advancement to grant it.
-                    // This is safe to call multiple times; it won't re-grant if already completed.
                     for (String criterion : advancement.value().criteria().keySet()) {
                         player.getAdvancements().award(advancement, criterion);
                     }
