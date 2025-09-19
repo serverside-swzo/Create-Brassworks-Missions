@@ -24,7 +24,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import net.swzo.brassworksmissions.BrassworksmissionsMod;
 import net.swzo.brassworksmissions.missions.ActiveMission;
-import net.swzo.brassworksmissions.missions.MissionController;
 import net.swzo.brassworksmissions.missions.PlayerMissionData;
 
 import java.util.ArrayList;
@@ -100,7 +99,7 @@ public class BrassworksmissionsModVariables {
             final String missionType = "brassworksmissions:disabled";
             final String title = "No Mission";
             final int requiredAmount = 1;
-            final boolean isItemRequirement = false;
+            final String requirementType = "block";
             final int rewardAmount = 1;
 
             ItemStack requirementStack = new ItemStack(Items.BARRIER, requiredAmount);
@@ -113,7 +112,7 @@ public class BrassworksmissionsModVariables {
                         title,
                         requirementStack.copy(),
                         requiredAmount,
-                        isItemRequirement,
+                        requirementType,
                         rewardStack.copy()
                 );
                 missionData.setMission(i, mission);

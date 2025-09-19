@@ -65,7 +65,7 @@ public class MissionUIHelper {
             entry("brassworksmissions:move_on_belt", "mission.brassworksmissions.verb.travel"),
             entry("brassworksmissions:saw", "mission.brassworksmissions.verb.saw"),
             entry("brassworksmissions:drill_block", "mission.brassworksmissions.verb.drill"),
-            entry("brassworksmissions:harvest", "mission.brassworksmissions.verb.process"),
+            entry("brassworksmissions:harvest", "mission.brassworksmissions.verb.farm"),
             entry("brassworksmissions:mechanical_craft", "mission.brassworksmissions.verb.craft"),
 
             entry("brassworksmissions:mix_item", "mission.brassworksmissions.verb.process"),

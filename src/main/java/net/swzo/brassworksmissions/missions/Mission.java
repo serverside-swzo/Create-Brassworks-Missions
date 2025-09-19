@@ -30,7 +30,19 @@ public class Mission {
         String title = titles.get(random.nextInt(titles.size()));
 
         int reqAmount = requirement.minAmount + random.nextInt(requirement.maxAmount - requirement.minAmount + 1);
-        ItemStack reqStack = Optional.ofNullable(requirement.item)
+
+        String selectedItemName = null;
+        if (requirement.item instanceof String) {
+            selectedItemName = (String) requirement.item;
+        } else if (requirement.item instanceof List) {
+            @SuppressWarnings("unchecked")
+            List<String> items = (List<String>) requirement.item;
+            if (!items.isEmpty()) {
+                selectedItemName = items.get(random.nextInt(items.size()));
+            }
+        }
+
+        ItemStack reqStack = Optional.ofNullable(selectedItemName)
                 .map(ResourceLocation::parse)
                 .map(BuiltInRegistries.ITEM::get)
                 .map(ItemStack::new)
@@ -41,14 +53,14 @@ public class Mission {
         ItemStack rewardStack = BrassworksmissionsMod.getRewardManager().getRewardItem();
         rewardStack.setCount(rewardAmount);
 
-        return new ActiveMission(id, title, reqStack, reqAmount, requirement.isItem, rewardStack);
+        return new ActiveMission(id, title, reqStack, reqAmount, requirement.requirementType, rewardStack);
     }
 
     public static class Requirement {
-        @SerializedName("isItem")
-        private boolean isItem;
+        @SerializedName("requirementType")
+        private String requirementType;
         @SerializedName("item")
-        private String item;
+        private Object item;
         @SerializedName("minAmount")
         private int minAmount;
         @SerializedName("maxAmount")
