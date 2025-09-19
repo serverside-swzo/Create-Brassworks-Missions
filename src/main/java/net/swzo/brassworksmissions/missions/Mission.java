@@ -4,9 +4,8 @@ import com.google.gson.annotations.SerializedName;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.swzo.brassworksmissions.BrassworksmissionsMod;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,8 +38,8 @@ public class Mission {
         if(!reqStack.isEmpty()) reqStack.setCount(1);
 
         int rewardAmount = reward.minAmount + random.nextInt(reward.maxAmount - reward.minAmount + 1);
-        Item rewardItem = Optional.ofNullable(BuiltInRegistries.ITEM.get(ResourceLocation.parse(reward.item))).orElse(Items.AIR);
-        ItemStack rewardStack = new ItemStack(rewardItem, rewardAmount);
+        ItemStack rewardStack = BrassworksmissionsMod.getRewardManager().getRewardItem();
+        rewardStack.setCount(rewardAmount);
 
         return new ActiveMission(id, title, reqStack, reqAmount, requirement.isItem, rewardStack);
     }
@@ -57,8 +56,6 @@ public class Mission {
     }
 
     public static class Reward {
-        @SerializedName("item")
-        private String item;
         @SerializedName("minAmount")
         private int minAmount;
         @SerializedName("maxAmount")

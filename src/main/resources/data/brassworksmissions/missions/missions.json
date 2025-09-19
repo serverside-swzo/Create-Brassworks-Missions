@@ -12,7 +12,6 @@
       "maxAmount": 64
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 2,
       "maxAmount": 5
     }
@@ -32,7 +31,6 @@
       "maxAmount": 48
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 5,
       "maxAmount": 10
     }
@@ -52,7 +50,6 @@
       "maxAmount": 1
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 1,
       "maxAmount": 1
     }
@@ -72,7 +69,6 @@
       "maxAmount": 20
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 1,
       "maxAmount": 4
     }
@@ -92,7 +88,6 @@
       "maxAmount": 1
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 8,
       "maxAmount": 12
     }
@@ -112,7 +107,6 @@
       "maxAmount": 30
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 3,
       "maxAmount": 6
     }
@@ -132,7 +126,6 @@
       "maxAmount": 10
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 16,
       "maxAmount": 32
     }
@@ -152,7 +145,6 @@
       "maxAmount": 10
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 3,
       "maxAmount": 7
     }
@@ -172,7 +164,6 @@
       "maxAmount": 64
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 4,
       "maxAmount": 8
     }
@@ -192,7 +183,6 @@
       "maxAmount": 64
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 4,
       "maxAmount": 8
     }
@@ -212,7 +202,6 @@
       "maxAmount": 128
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 5,
       "maxAmount": 10
     }
@@ -232,7 +221,6 @@
       "maxAmount": 128
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 6,
       "maxAmount": 12
     }
@@ -252,7 +240,6 @@
       "maxAmount": 256
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 8,
       "maxAmount": 16
     }
@@ -272,7 +259,6 @@
       "maxAmount": 128
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 3,
       "maxAmount": 6
     }
@@ -292,7 +278,6 @@
       "maxAmount": 512
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 5,
       "maxAmount": 10
     }
@@ -312,7 +297,6 @@
       "maxAmount": 2
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 10,
       "maxAmount": 20
     }
@@ -332,7 +316,6 @@
       "maxAmount": 1024
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 15,
       "maxAmount": 30
     }
@@ -352,7 +335,6 @@
       "maxAmount": 500
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 3,
       "maxAmount": 7
     }
@@ -372,7 +354,6 @@
       "maxAmount": 20000
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 5,
       "maxAmount": 10
     }
@@ -392,7 +373,6 @@
       "maxAmount": 9000
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 5,
       "maxAmount": 10
     }
@@ -412,7 +392,6 @@
       "maxAmount": 3000
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 5,
       "maxAmount": 10
     }
@@ -432,7 +411,6 @@
       "maxAmount": 4000
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 5,
       "maxAmount": 10
     }
@@ -452,7 +430,6 @@
       "maxAmount": 14
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 2,
       "maxAmount": 4
     }
@@ -472,7 +449,6 @@
       "maxAmount": 4500
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 4,
       "maxAmount": 8
     }
@@ -492,7 +468,6 @@
       "maxAmount": 128
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 15,
       "maxAmount": 30
     }
@@ -512,7 +487,6 @@
       "maxAmount": 128
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 2,
       "maxAmount": 6
     }
@@ -532,7 +506,6 @@
       "maxAmount": 256
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 1,
       "maxAmount": 4
     }
@@ -552,7 +525,6 @@
       "maxAmount": 256
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 3,
       "maxAmount": 8
     }
@@ -572,29 +544,8 @@
       "maxAmount": 256
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 10,
       "maxAmount": 20
-    }
-  },
-  {
-    "id": "brassworksmissions:harvest",
-    "weight": 3.0,
-    "titles": [
-      "Root Crop Run",
-      "Potato Potency",
-      "Carrot Collector"
-    ],
-    "requirement": {
-      "requirementType": "block",
-      "item": "minecraft:potatoes",
-      "minAmount": 48,
-      "maxAmount": 192
-    },
-    "reward": {
-      "item": "numismatics:spur",
-      "minAmount": 8,
-      "maxAmount": 18
     }
   },
   {
@@ -612,7 +563,6 @@
       "maxAmount": 160
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 8,
       "maxAmount": 16
     }
@@ -632,7 +582,6 @@
       "maxAmount": 64
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 6,
       "maxAmount": 12
     }
@@ -652,7 +601,6 @@
       "maxAmount": 64
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 6,
       "maxAmount": 12
     }
@@ -672,7 +620,6 @@
       "maxAmount": 20
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 1,
       "maxAmount": 4
     }
@@ -692,7 +639,6 @@
       "maxAmount": 12
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 1,
       "maxAmount": 3
     }
@@ -712,7 +658,6 @@
       "maxAmount": 8
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 2,
       "maxAmount": 6
     }
@@ -732,7 +677,6 @@
       "maxAmount": 1
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 2,
       "maxAmount": 5
     }
@@ -752,7 +696,6 @@
       "maxAmount": 1
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 4,
       "maxAmount": 8
     }
@@ -772,7 +715,6 @@
       "maxAmount": 64
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 8,
       "maxAmount": 14
     }
@@ -792,7 +734,6 @@
       "maxAmount": 28
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 4,
       "maxAmount": 8
     }
@@ -812,7 +753,6 @@
       "maxAmount": 20
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 5,
       "maxAmount": 10
     }
@@ -832,7 +772,6 @@
       "maxAmount": 18
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 6,
       "maxAmount": 12
     }
@@ -852,7 +791,6 @@
       "maxAmount": 14
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 10,
       "maxAmount": 20
     }
@@ -872,7 +810,6 @@
       "maxAmount": 20
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 12,
       "maxAmount": 24
     }
@@ -892,7 +829,6 @@
       "maxAmount": 32
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 2,
       "maxAmount": 6
     }
@@ -912,7 +848,6 @@
       "maxAmount": 24
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 3,
       "maxAmount": 7
     }
@@ -932,7 +867,6 @@
       "maxAmount": 96
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 6,
       "maxAmount": 12
     }
@@ -952,7 +886,6 @@
       "maxAmount": 24
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 4,
       "maxAmount": 10
     }
@@ -972,7 +905,6 @@
       "maxAmount": 96
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 6,
       "maxAmount": 12
     }
@@ -992,7 +924,6 @@
       "maxAmount": 128
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 5,
       "maxAmount": 11
     }
@@ -1012,7 +943,6 @@
       "maxAmount": 32
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 10,
       "maxAmount": 20
     }
@@ -1032,7 +962,6 @@
       "maxAmount": 12
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 12,
       "maxAmount": 24
     }
@@ -1052,7 +981,6 @@
       "maxAmount": 256
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 6,
       "maxAmount": 14
     }
@@ -1072,7 +1000,6 @@
       "maxAmount": 192
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 5,
       "maxAmount": 11
     }
@@ -1092,7 +1019,6 @@
       "maxAmount": 256
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 8,
       "maxAmount": 16
     }
@@ -1112,7 +1038,6 @@
       "maxAmount": 192
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 10,
       "maxAmount": 18
     }
@@ -1132,7 +1057,6 @@
       "maxAmount": 512
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 4,
       "maxAmount": 10
     }
@@ -1152,7 +1076,6 @@
       "maxAmount": 512
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 5,
       "maxAmount": 10
     }
@@ -1172,7 +1095,6 @@
       "maxAmount": 384
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 6,
       "maxAmount": 12
     }
@@ -1192,7 +1114,6 @@
       "maxAmount": 4
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 12,
       "maxAmount": 24
     }
@@ -1212,7 +1133,6 @@
       "maxAmount": 64
     },
     "reward": {
-      "item": "numismatics:spur",
       "minAmount": 10,
       "maxAmount": 20
     }

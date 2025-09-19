@@ -2,7 +2,7 @@
   "parent": "brassworksmissions:root",
   "display": {
     "icon": {
-      "id": "numismatics:spur"
+      "id": "minecraft:copper_ingot"
     },
     "title": {
       "translate": "advancements.brassworksmissions.missions_10.title"

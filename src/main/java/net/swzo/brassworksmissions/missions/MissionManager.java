@@ -21,6 +21,7 @@ public class MissionManager extends SimpleJsonResourceReloadListener {
     private static final Gson GSON = new GsonBuilder().create();
     private static final Type MISSION_LIST_TYPE = new TypeToken<List<Mission>>() {}.getType();
     private static final String DIRECTORY = "missions";
+    private static final ResourceLocation REWARD_FILE_ID = ResourceLocation.fromNamespaceAndPath(BrassworksmissionsMod.MODID, "mission_reward");
 
     private List<Mission> availableMissions = new ArrayList<>();
     private double totalWeight = 0.0;
@@ -35,6 +36,9 @@ public class MissionManager extends SimpleJsonResourceReloadListener {
         totalWeight = 0.0;
 
         for (Map.Entry<ResourceLocation, JsonElement> entry : objects.entrySet()) {
+            if (entry.getKey().equals(REWARD_FILE_ID)) {
+                continue;
+            }
 
             if (!entry.getKey().getNamespace().equals(BrassworksmissionsMod.MODID)) {
                 continue;

@@ -2,7 +2,7 @@
   "parent": "brassworksmissions:missions_500",
   "display": {
     "icon": {
-      "id": "numismatics:sun"
+      "id": "minecraft:diamond"
     },
     "title": {
       "translate": "advancements.brassworksmissions.missions_1000.title"

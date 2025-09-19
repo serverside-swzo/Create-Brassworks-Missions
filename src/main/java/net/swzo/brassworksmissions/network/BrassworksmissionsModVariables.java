@@ -104,7 +104,7 @@ public class BrassworksmissionsModVariables {
             final int rewardAmount = 1;
 
             ItemStack requirementStack = new ItemStack(Items.BARRIER, requiredAmount);
-            ItemStack rewardStack = new ItemStack(MissionController.SPUR.getItem(), rewardAmount);
+            ItemStack rewardStack = new ItemStack(Items.DIAMOND, rewardAmount);
 
             int fillSlots = Math.min(6, PlayerMissionData.MISSION_SLOTS);
             for (int i = 0; i < fillSlots; i++) {

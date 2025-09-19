@@ -2,7 +2,7 @@
   "parent": "brassworksmissions:missions_50",
   "display": {
     "icon": {
-      "id": "numismatics:sprocket"
+      "id": "minecraft:iron_ingot"
     },
     "title": {
       "translate": "advancements.brassworksmissions.missions_100.title"

@@ -20,6 +20,7 @@ import net.swzo.brassworksmissions.init.BrassworksmissionsModMenus;
 import net.swzo.brassworksmissions.init.CustomStats;
 import net.swzo.brassworksmissions.missions.MissionManager;
 import net.swzo.brassworksmissions.missions.MissionRegistry;
+import net.swzo.brassworksmissions.missions.reward.RewardManager;
 import net.swzo.brassworksmissions.network.BrassworksmissionsModVariables;
 import org.slf4j.Logger;
 
@@ -32,6 +33,7 @@ public class BrassworksmissionsMod {
     public static final String MODID = "brassworksmissions";
 
     private static final MissionManager missionManager = new MissionManager();
+    private static RewardManager rewardManager = new RewardManager();
 
     public BrassworksmissionsMod(IEventBus modEventBus) {
         NeoForge.EVENT_BUS.register(this);
@@ -50,10 +52,14 @@ public class BrassworksmissionsMod {
     @SubscribeEvent
     public void onAddReloadListener(AddReloadListenerEvent event) {
         event.addListener(missionManager);
+        event.addListener(rewardManager);
     }
 
     public static MissionManager getMissionManager() {
         return missionManager;
+    }
+    public static RewardManager getRewardManager() {
+        return rewardManager;
     }
 
     private static boolean networkingRegistered = false;

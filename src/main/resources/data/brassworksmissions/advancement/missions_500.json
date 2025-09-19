@@ -2,7 +2,7 @@
   "parent": "brassworksmissions:missions_250",
   "display": {
     "icon": {
-      "id": "numismatics:crown"
+      "id": "create:brass_ingot"
     },
     "title": {
       "translate": "advancements.brassworksmissions.missions_500.title"

@@ -2,7 +2,7 @@
   "parent": "brassworksmissions:missions_100",
   "display": {
     "icon": {
-      "id": "numismatics:cog"
+      "id": "create:polished_rose_quartz"
     },
     "title": {
       "translate": "advancements.brassworksmissions.missions_250.title"

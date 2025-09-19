@@ -2,7 +2,7 @@
   "parent": "brassworksmissions:missions_10",
   "display": {
     "icon": {
-      "id": "numismatics:bevel"
+      "id": "create:zinc_ingot"
     },
     "title": {
       "translate": "advancements.brassworksmissions.missions_50.title"

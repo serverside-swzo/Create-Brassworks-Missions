@@ -34,10 +34,3 @@ type = "required"
 versionRange = "[6.0.6,)"
 ordering = "NONE"
 side = "BOTH"
-
-[[dependencies."${mod_id}"]]
-modId = "numismatics"
-type = "required"
-versionRange = "[1.0.18+neoforge-mc1.21.1,)"
-ordering = "NONE"
-side = "BOTH"

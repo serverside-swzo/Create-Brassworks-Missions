@@ -1,7 +1,7 @@
 package net.swzo.brassworksmissions.missions;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.AdvancementHolder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -9,6 +9,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.swzo.brassworksmissions.BrassworksmissionsMod;
 import net.swzo.brassworksmissions.init.CustomStats;
@@ -28,9 +29,6 @@ public class MissionController {
             1000, ResourceLocation.fromNamespaceAndPath(BrassworksmissionsMod.MODID, "missions_1000")
     );
 
-    public static final ItemStack SPUR = new ItemStack(
-            BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("numismatics", "spur"))
-    );
 
     @Nullable
     public static PlayerMissionData getMissionData(Player player) {
@@ -69,26 +67,41 @@ public class MissionController {
 
     public static void rerollMission(ServerPlayer player, int slot) {
         if (isMissionCompleted(player, slot)) {
-            player.sendSystemMessage(Component.translatable("§cYou cannot reroll a completed mission."));
+            player.sendSystemMessage(Component.translatable("gui.brassworksmissions.error.completed_mission")
+                    .withStyle(ChatFormatting.RED));
             return;
         }
         BrassworksmissionsModVariables.PlayerVariables playerVariables = player.getData(BrassworksmissionsModVariables.PLAYER_VARIABLES);
         int rerollCost = playerVariables.reRollAmount * 2;
         int cappedCost = Math.min(rerollCost, 32);
+        Item rerollitem = BrassworksmissionsMod.getRewardManager().getRewardItem().getItem();
+        ItemStack rerollstack = new ItemStack(rerollitem);
         if (playerVariables.reRollAmount * 2 > 32) {
-            player.sendSystemMessage(Component.translatable("§cYour reroll cost has reached its cap of 32 spurs. You can no longer reroll."));
+            player.sendSystemMessage(Component.translatable(
+                    "gui.brassworksmissions.error.cost_cap_reached",
+                    rerollstack.getHoverName().copy().append(Component.translatable("gui.brassworksmissions.ui.plural_format"))
+            ).withStyle(ChatFormatting.RED));
             return;
         }
-        int playerSpurs = player.getInventory().countItem(SPUR.getItem());
-        if (playerSpurs < cappedCost) {
-            player.sendSystemMessage(Component.translatable("§cYou need " + cappedCost + " spurs to reroll this mission."));
+        int playerOwned = player.getInventory().countItem(rerollitem);
+        if (playerOwned < cappedCost) {
+            player.sendSystemMessage(Component.translatable(
+                    "gui.brassworksmissions.error.not_enough",
+                    cappedCost,
+                    rerollstack.getHoverName().copy().append(Component.translatable("gui.brassworksmissions.ui.plural_format"))
+            ).withStyle(ChatFormatting.RED));
             return;
         }
         player.getInventory().clearOrCountMatchingItems(
-                stack -> stack.is(SPUR.getItem()), cappedCost, player.inventoryMenu.getCraftSlots()
+                stack -> stack.is(rerollitem), cappedCost, player.inventoryMenu.getCraftSlots()
         );
         player.inventoryMenu.broadcastChanges();
-        player.sendSystemMessage(Component.translatable("§aRerolled mission for " + cappedCost + " spurs."));
+        player.sendSystemMessage(Component.translatable(
+                "gui.brassworksmissions.success.rerolled",
+                cappedCost,
+                rerollstack.getHoverName().copy().append(Component.translatable("gui.brassworksmissions.ui.plural_format"))
+        ).withStyle(ChatFormatting.GREEN));
+
         playerVariables.reRollAmount++;
         playerVariables.syncPlayerVariables(player);
         PlayerMissionData data = getMissionData(player);
@@ -99,7 +112,6 @@ public class MissionController {
         Mission missionTemplate = BrassworksmissionsMod.getMissionManager().getWeightedRandomMission(random);
         if (missionTemplate != null) {
             data.setMission(slot, missionTemplate.createInstance(random));
-
             playerVariables.syncPlayerVariables(player);
         }
     }
@@ -209,10 +221,6 @@ public class MissionController {
         return count;
     }
 
-    /**
-     * Checks the player's mission completion stat and grants the corresponding advancements.
-     * @param player The server player to check.
-     */
     private static void checkAndGrantAdvancements(ServerPlayer player) {
         int completedMissions = player.getStats().getValue(Stats.CUSTOM.get(CustomStats.MISSIONS_COMPLETED.get()));
 

@@ -100,7 +100,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
     runtimeOnly "curse.maven:jei-238222:6614392"
-    implementation "curse.maven:numismatics-889722:6791069"
+//    implementation "curse.maven:numismatics-889722:6791069"
     implementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
     implementation("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:${ponder_version}")
     compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_version}")
