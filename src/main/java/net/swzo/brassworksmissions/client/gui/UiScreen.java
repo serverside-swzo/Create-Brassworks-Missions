@@ -21,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.swzo.brassworksmissions.BrassworksmissionsMod;
 import net.swzo.brassworksmissions.client.gui.widget.CustomIconButton;
+import net.swzo.brassworksmissions.init.KeybindingInit;
 import net.swzo.brassworksmissions.missions.ActiveMission;
 import net.swzo.brassworksmissions.missions.MissionController;
 import net.swzo.brassworksmissions.missions.PlayerMissionData;
@@ -300,7 +301,7 @@ public class UiScreen extends AbstractContainerScreen<UiMenu> {
 
     @Override
     public boolean keyPressed(int key, int b, int c) {
-        if (key == 256) {
+        if (key == 256 || key == KeybindingInit.OPEN_MISSIONS_UI_KEY.getKey().getValue()) {
             this.minecraft.player.closeContainer();
             int selectedSlot = missionSelector.getState();
 
