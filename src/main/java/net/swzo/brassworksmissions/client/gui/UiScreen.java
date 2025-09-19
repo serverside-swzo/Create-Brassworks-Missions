@@ -309,6 +309,9 @@ public class UiScreen extends AbstractContainerScreen<UiMenu> {
 
             PacketDistributor.sendToServer(new UpdateSelectedMissionMessage(selectedSlot));
             return true;
+        } else if (key == KeybindingInit.TRACK_MISSIONS_UI_KEY.getKey().getValue()) {
+            PacketDistributor.sendToServer(new UpdateSelectedMissionMessage(missionSelector.getState()));
+            PacketDistributor.sendToServer(new UiButtonMessage(3, x, y, (int) z, missionSelector.getState()));
         }
         return super.keyPressed(key, b, c);
     }

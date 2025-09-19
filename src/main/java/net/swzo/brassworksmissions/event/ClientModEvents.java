@@ -13,5 +13,6 @@ public class ClientModEvents {
     @SubscribeEvent
     public static void onKeyRegister(RegisterKeyMappingsEvent event) {
         event.register(KeybindingInit.OPEN_MISSIONS_UI_KEY);
+        event.register(KeybindingInit.TRACK_MISSIONS_UI_KEY);
     }
 }

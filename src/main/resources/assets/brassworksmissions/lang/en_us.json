@@ -30,6 +30,7 @@
   "gui.brassworksmissions.ui.timer.minute.singular": "m",
   "gui.brassworksmissions.ui.timer.hour.singular": "h",
   "key.brassworksmissions.open_missions_ui": "Open Missions UI",
+  "key.brassworksmissions.track_missions_ui": "Track Mission",
   "key.category.brassworksmissions": "Brassworks Missions",
 
   "gui.brassworksmissions.tooltip.available_missions": "Available Missions",
