@@ -7,7 +7,9 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.util.Tuple;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.util.thread.SidedThreadGroups;
 import net.neoforged.neoforge.common.NeoForge;
@@ -16,6 +18,7 @@ import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import net.swzo.brassworksmissions.config.Config;
 import net.swzo.brassworksmissions.init.BrassworksmissionsModMenus;
 import net.swzo.brassworksmissions.init.CustomStats;
 import net.swzo.brassworksmissions.missions.MissionManager;
@@ -35,7 +38,7 @@ public class BrassworksmissionsMod {
     private static final MissionManager missionManager = new MissionManager();
     private static RewardManager rewardManager = new RewardManager();
 
-    public BrassworksmissionsMod(IEventBus modEventBus) {
+    public BrassworksmissionsMod(IEventBus modEventBus, ModContainer container) {
         NeoForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::registerNetworking);
         modEventBus.addListener(this::commonSetup);
@@ -43,6 +46,7 @@ public class BrassworksmissionsMod {
         CustomStats.CUSTOM_STATS.register(modEventBus);
         BrassworksmissionsModVariables.ATTACHMENT_TYPES.register(modEventBus);
         BrassworksmissionsModMenus.REGISTRY.register(modEventBus);
+        container.registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

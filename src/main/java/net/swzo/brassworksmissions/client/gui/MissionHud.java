@@ -14,6 +14,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.swzo.brassworksmissions.BrassworksmissionsMod;
+import net.swzo.brassworksmissions.config.Config;
 import net.swzo.brassworksmissions.missions.ActiveMission;
 import net.swzo.brassworksmissions.network.BrassworksmissionsModVariables;
 
@@ -48,7 +49,7 @@ public class MissionHud {
         GuiGraphics guiGraphics = event.getGuiGraphics();
         int screenWidth = event.getGuiGraphics().guiWidth();
 
-        int yOffset = 10;
+        int yOffset = Config.CLIENT.HUD_Y_OFFSET.get();
 
         for (int missionSlot : playerVariables.trackedMissions) {
             if (missionSlot >= 0 && missionSlot < playerVariables.missionData.getMissions().length) {
@@ -99,7 +100,13 @@ public class MissionHud {
 
         int bgWidth = contentWidth + PADDING_LEFT + PADDING_RIGHT;
         int bgHeight = contentHeight + PADDING_TOP + PADDING_BOTTOM;
-        int x = screenWidth - bgWidth - 10;
+
+        int x;
+        if (Config.CLIENT.LEFT_ALIGN_HUD.get()) {
+            x = Config.CLIENT.HUD_X_OFFSET.get();
+        } else {
+            x = screenWidth - bgWidth - Config.CLIENT.HUD_X_OFFSET.get();
+        }
 
         drawNineSliceManually(guiGraphics, NINE_SLICE_BACKGROUND, x, y, bgWidth, bgHeight);
 
