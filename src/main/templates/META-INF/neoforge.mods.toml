@@ -8,6 +8,8 @@ version = "${mod_version}"
 displayName = "${mod_name}"
 displayURL = "https://modrinth.com/modpack/brassworks-smp-modpack"
 authors = "${mod_authors}"
+logoFile="mod_icon.png"
+logoBlur=true
 
 description = '''${mod_description}'''
 
