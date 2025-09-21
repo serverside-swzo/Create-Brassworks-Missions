@@ -47,6 +47,7 @@ public class BrassworksmissionsMod {
         BrassworksmissionsModVariables.ATTACHMENT_TYPES.register(modEventBus);
         BrassworksmissionsModMenus.REGISTRY.register(modEventBus);
         container.registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_SPEC);
+        container.registerConfig(ModConfig.Type.SERVER, Config.SERVER_SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

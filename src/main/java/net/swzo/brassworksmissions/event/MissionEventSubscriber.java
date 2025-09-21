@@ -14,7 +14,6 @@ import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.swzo.brassworksmissions.BrassworksmissionsMod;
 import net.swzo.brassworksmissions.missions.ActiveMission;
 import net.swzo.brassworksmissions.missions.IMissionType;
@@ -27,8 +26,6 @@ import net.swzo.brassworksmissions.missions.types.vanilla.WalkMissionType;
 import net.swzo.brassworksmissions.network.BrassworksmissionsModVariables;
 import net.swzo.brassworksmissions.util.DistanceManager;
 
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -61,19 +58,6 @@ public class MissionEventSubscriber {
 
         if (needsSync) {
             player.getData(BrassworksmissionsModVariables.PLAYER_VARIABLES).syncPlayerVariables(player);
-        }
-    }
-
-    @SubscribeEvent
-    public static void onServerTick(ServerTickEvent.Post event) {
-
-        ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);
-        int currentMinute = now.getMinute();
-
-        if (currentMinute != lastCheckedMinute) {
-            lastCheckedMinute = currentMinute;
-
-            event.getServer().getPlayerList().getPlayers().forEach(MissionResetHandler::checkAndResetMissions);
         }
     }
 
