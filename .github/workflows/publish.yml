@@ -18,6 +18,9 @@ jobs:
     permissions:
       contents: write # Required to create a GitHub release
     steps:
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
       # 1. Checkout your repository code
       - name: Checkout repository
         uses: actions/checkout@v4
