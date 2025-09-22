@@ -18,8 +18,6 @@ jobs:
     permissions:
       contents: write # Required to create a GitHub release
     steps:
-      - name: Make gradlew executable
-        run: chmod +x gradlew
 
       # 1. Checkout your repository code
       - name: Checkout repository
@@ -34,6 +32,10 @@ jobs:
           java-version: '21' # Use the Java version required by 1.21.1
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
+        # Make the fuckass executable
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
       - name: Build with Gradle
         run: ./gradlew build
         # This assumes your build process outputs the .jar file to 'build/libs/'
