@@ -10,7 +10,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.swzo.brassworksmissions.BrassworksmissionsMod;
-import net.swzo.brassworksmissions.util.OpenMissionsUI;
+import net.swzo.brassworksmissions.util.UiUtils;
 
 @EventBusSubscriber
 public record OpenMissionsUIMessage() implements CustomPacketPayload {
@@ -21,7 +21,7 @@ public record OpenMissionsUIMessage() implements CustomPacketPayload {
     public static void handleData(final OpenMissionsUIMessage message, final IPayloadContext context) {
         context.enqueueWork(() -> {
             if (context.player() instanceof ServerPlayer player) {
-                OpenMissionsUI.execute(player.level(), player.getX(), player.getY(), player.getZ(), player);
+                UiUtils.openUi(player.level(), player.getX(), player.getY(), player.getZ(), player);
             }
         });
     }

@@ -13,8 +13,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.LevelAccessor;
 import net.swzo.brassworksmissions.world.inventory.UiMenu;
 
-public class OpenMissionsUI {
-	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
+public class UiUtils {
+	public static void openUi(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
 		if (entity instanceof ServerPlayer serverPlayer) {
@@ -37,4 +37,11 @@ public class OpenMissionsUI {
 			}, blockPos);
 		}
 	}
+
+    public static void closeUi(Entity entity) {
+        if (entity == null)
+            return;
+        if (entity instanceof Player player)
+            player.closeContainer();
+    }
 }

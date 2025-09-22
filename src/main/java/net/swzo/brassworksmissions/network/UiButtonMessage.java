@@ -17,7 +17,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.swzo.brassworksmissions.BrassworksmissionsMod;
 import net.swzo.brassworksmissions.missions.MissionController;
-import net.swzo.brassworksmissions.util.CloseMissionsUI;
+import net.swzo.brassworksmissions.util.UiUtils;
 
 @EventBusSubscriber
 public record UiButtonMessage(int buttonID, int x, int y, int z, int slot) implements CustomPacketPayload {
@@ -76,11 +76,11 @@ public record UiButtonMessage(int buttonID, int x, int y, int z, int slot) imple
                 MissionController.claimAllRewards(serverPlayer);
                 AllSoundEvents.STOCK_TICKER_TRADE.playOnServer(world, serverPlayer.blockPosition());
             }
-            CloseMissionsUI.execute(entity);
+            UiUtils.closeUi(entity);
         }
 
         if (buttonID == 1) {
-            CloseMissionsUI.execute(entity);
+            UiUtils.closeUi(entity);
         }
 
         if (buttonID == 2) {

@@ -11,7 +11,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.swzo.brassworksmissions.missions.MissionController;
-import net.swzo.brassworksmissions.util.OpenMissionsUI;
+import net.swzo.brassworksmissions.util.UiUtils;
 
 @EventBusSubscriber
 public class MissionCommand {
@@ -24,7 +24,7 @@ public class MissionCommand {
 
                 .executes(context -> {
                     ServerPlayer player = context.getSource().getPlayerOrException();
-                    OpenMissionsUI.execute(player.level(), player.getX(), player.getY(), player.getZ(), player);
+                    UiUtils.openUi(player.level(), player.getX(), player.getY(), player.getZ(), player);
                     return 1;
                 })
 
