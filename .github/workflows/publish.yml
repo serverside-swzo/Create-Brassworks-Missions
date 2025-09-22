@@ -1,0 +1,71 @@
+# This workflow publishes your NeoForge mod to CurseForge and Modrinth.
+# It is triggered manually from the Actions tab on your GitHub repository.
+
+name: Publish Mod
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The version number for this release (e.g., 1.0.0)'
+        required: true
+        type: string
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required to create a GitHub release
+    steps:
+      # 1. Checkout your repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # You would typically have a build step here to generate your mod .jar file.
+      # For example, if you are using Gradle:
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21' # Use the Java version required by 1.21.1
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+      - name: Build with Gradle
+        run: ./gradlew build
+        # This assumes your build process outputs the .jar file to 'build/libs/'
+
+      # 2. Use mc-publish to upload the mod files
+      - name: Publish to Modrinth and CurseForge
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          # --- GENERAL ---
+          # The version number from the manual trigger input
+          version: ${{ inputs.version }}
+          # The name for the release
+          name: '[${{ inputs.version }}] Create: Brassworks Missions'
+          # Use the changelog.md file for the release notes
+          changelog-file: changelog.md
+          # Specify the loader for your mod
+          loaders: neoforge
+          # Specify the Minecraft version
+          game-versions: 1.21.1
+          # Specifies which files to upload. Assumes your built jar is in build/libs
+          # and doesn't contain "-dev", "-sources", or "-javadoc".
+          files: build/libs/!(*-@(dev|sources|javadoc)).jar
+
+          # --- MODRINTH ---
+          # Your Modrinth project ID. Replace with your actual ID.
+          modrinth-id: uUhZpyjI
+          # Your Modrinth API token, securely stored as a GitHub secret
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          # --- CURSEFORGE ---
+          # Your CurseForge project ID. Replace with your actual ID.
+          curseforge-id: 1348982
+          # Your CurseForge API token, securely stored as a GitHub secret
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+
+          # --- GITHUB (Optional) ---
+          # Creates a release on GitHub as well
+          github-token: ${{ secrets.GITHUB_TOKEN }}
