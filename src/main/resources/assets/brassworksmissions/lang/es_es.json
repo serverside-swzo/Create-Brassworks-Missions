@@ -55,7 +55,7 @@
   "gui.brassworksmissions.error.not_enough": "Necesitas %s %s para cambiar esta mision.",
   "gui.brassworksmissions.success.rerolled": "Mision cambiada por %s %s.",
 
-  "mission.brassworksmissions.prefix.punctuation": " ",
+  "mission.brassworksmissions.prefix.punctuation": ": ",
 
   "mission.brassworksmissions.verb.objective": "Objetivo",
   "mission.brassworksmissions.verb.break": "Destruye",

@@ -55,7 +55,7 @@
   "gui.brassworksmissions.error.not_enough": "你需要 %s %s 才能重刷此任务。",
   "gui.brassworksmissions.success.rerolled": "花费 %s %s 重刷了任务。",
 
-  "mission.brassworksmissions.prefix.punctuation": " ",
+  "mission.brassworksmissions.prefix.punctuation": ": ",
 
   "mission.brassworksmissions.verb.objective": "目标",
   "mission.brassworksmissions.verb.break": "破坏",

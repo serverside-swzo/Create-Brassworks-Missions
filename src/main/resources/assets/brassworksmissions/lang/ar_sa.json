@@ -55,7 +55,7 @@
   "gui.brassworksmissions.error.not_enough": "تحتاج %s %s عشان تغير هالمهمة.",
   "gui.brassworksmissions.success.rerolled": "تم تغيير المهمة مقابل %s %s.",
 
-  "mission.brassworksmissions.prefix.punctuation": " ",
+  "mission.brassworksmissions.prefix.punctuation": ": ",
 
   "mission.brassworksmissions.verb.objective": "الهدف",
   "mission.brassworksmissions.verb.break": "كسر",
