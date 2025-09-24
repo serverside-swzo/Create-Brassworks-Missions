@@ -18,7 +18,9 @@
   "gui.brassworksmissions.ui.selected_prefix": "المحدد: ",
   "gui.brassworksmissions.ui.mission_prefix": "مهمة #%s",
   "gui.brassworksmissions.ui.progress": "التقدم:",
+  "gui.brassworksmissions.ui.progress_slash": " / ",
   "gui.brassworksmissions.ui.reward": "الجائزة",
+  "gui.brassworksmissions.ui.reward_amount": "%sx ",
   "gui.brassworksmissions.ui.no_mission_data": "ماشي بيانات للمهمة",
   "gui.brassworksmissions.ui.select_mission": "اختر مهمة",
   "gui.brassworksmissions.ui.reset_timer_prefix": "يتصفر بعد: ",
@@ -52,6 +54,8 @@
   "gui.brassworksmissions.error.cost_cap_reached": "تكلفة التغيير وصلت حدها الأقصى 32 %s. ما تقدر تغير بعد.",
   "gui.brassworksmissions.error.not_enough": "تحتاج %s %s عشان تغير هالمهمة.",
   "gui.brassworksmissions.success.rerolled": "تم تغيير المهمة مقابل %s %s.",
+
+  "mission.brassworksmissions.prefix.punctuation": ": ",
 
   "mission.brassworksmissions.verb.objective": "الهدف",
   "mission.brassworksmissions.verb.break": "كسر",
