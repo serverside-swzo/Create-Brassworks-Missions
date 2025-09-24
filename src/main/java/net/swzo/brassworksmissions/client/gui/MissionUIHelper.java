@@ -126,7 +126,7 @@ public class MissionUIHelper {
         String verbKey = MISSION_VERBS.getOrDefault(missionType, "mission.brassworksmissions.verb.objective");
         Component verbComponent = Component.translatable(verbKey)
                 .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(DESCRIPTION_VERB_COLOR)));
-        Component punctuationComponent = Component.literal(": ")
+        Component punctuationComponent = Component.translatable("mission.brassworksmissions.prefix.punctuation")
                 .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(DESCRIPTION_PUNCTUATION_COLOR)));
         Component amountComponent = Component.literal(String.valueOf(mission.getRequiredAmount()))
                 .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(DESCRIPTION_AMOUNT_COLOR)));
@@ -197,7 +197,7 @@ public class MissionUIHelper {
 
         Component currentProgress = Component.literal(String.valueOf(mission.getProgress()))
                 .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(numberColor)));
-        Component slash = Component.literal(" / ")
+        Component slash = Component.translatable("gui.brassworksmissions.ui.progress_slash")
                 .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(PROGRESS_SLASH_COLOR)));
         Component requiredAmount = Component.literal(String.valueOf(mission.getRequiredAmount()))
                 .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(numberColor)));
@@ -214,7 +214,7 @@ public class MissionUIHelper {
                 .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(REWARD_TEXT_COLOR)));
         Component punctuation = Component.literal(": ")
                 .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(REWARD_PUNCTUATION_COLOR)));
-        Component amount = Component.literal(mission.getRewardItemStack().getCount() + "x ")
+        Component amount = Component.translatable( "gui.brassworksmissions.ui.reward_amount", mission.getRewardItemStack().getCount())
                 .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(REWARD_AMOUNT_COLOR)));
         Component item = Component.literal(mission.getRewardItemStack().getHoverName().getString())
                 .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(REWARD_ITEM_COLOR)));
