@@ -18,7 +18,9 @@
   "gui.brassworksmissions.ui.selected_prefix": "Seleccion: ",
   "gui.brassworksmissions.ui.mission_prefix": "Mision #%s",
   "gui.brassworksmissions.ui.progress": "Progreso:",
+  "gui.brassworksmissions.ui.progress_slash": " / ",
   "gui.brassworksmissions.ui.reward": "Recompensa",
+  "gui.brassworksmissions.ui.reward_amount": "%sx ",
   "gui.brassworksmissions.ui.no_mission_data": "No Mission Data",
   "gui.brassworksmissions.ui.select_mission": "Seleccionar Mision",
   "gui.brassworksmissions.ui.reset_timer_prefix": "Se renueva en: ",
@@ -53,6 +55,7 @@
   "gui.brassworksmissions.error.not_enough": "Necesitas %s %s para cambiar esta mision.",
   "gui.brassworksmissions.success.rerolled": "Mision cambiada por %s %s.",
 
+  "mission.brassworksmissions.prefix.punctuation": " ",
 
   "mission.brassworksmissions.verb.objective": "Objetivo",
   "mission.brassworksmissions.verb.break": "Destruye",
