@@ -135,7 +135,7 @@ public class UiScreen extends AbstractContainerScreen<UiMenu> {
             }
         }
 
-        ItemStack allRewardsIcon = new ItemStack(BrassworksmissionsMod.getRewardManager().getRewardItem().getItem(), MissionController.getTotalClaimableItemCount(entity));
+        ItemStack allRewardsIcon = new ItemStack(rewardStack.getItem(), MissionController.getTotalClaimableItemCount(entity));
         int allRewardsX = this.leftPos + 10;
         int allRewardsY = this.topPos + 140+12;
 
@@ -179,7 +179,7 @@ public class UiScreen extends AbstractContainerScreen<UiMenu> {
             List<Component> tip = new ArrayList<>();
             tip.add(Component.translatable("gui.brassworksmissions.tooltip.reroll_mission")
                     .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(MissionUIHelper.TOOLTIP_HEADER_COLOR))));
-            Item rerollitem = BrassworksmissionsMod.getRewardManager().getRewardItem().getItem();
+            Item rerollitem = rewardStack.getItem();
             ItemStack rerollstack = new ItemStack(rerollitem);
             Component costPrefix = Component.translatable(
                     "gui.brassworksmissions.tooltip.cost_prefix", cappedCost
@@ -283,7 +283,7 @@ public class UiScreen extends AbstractContainerScreen<UiMenu> {
         ItemStack missionIcon = new ItemStack(mission.getRequirementItemStack().getItem(), 1);
         guiGraphics.renderItem(missionIcon, this.leftPos + 25, this.topPos + 43);
 
-        ItemStack allRewardsIcon = new ItemStack(BrassworksmissionsMod.getRewardManager().getRewardItem().getItem(), MissionController.getTotalClaimableItemCount(entity));
+        ItemStack allRewardsIcon = new ItemStack(rewardStack.getItem(), MissionController.getTotalClaimableItemCount(entity));
         int allRewardsX = this.leftPos + 10;
         int allRewardsY = this.topPos + 140+12;
         guiGraphics.renderItem(allRewardsIcon, allRewardsX, allRewardsY);
@@ -362,48 +362,40 @@ public class UiScreen extends AbstractContainerScreen<UiMenu> {
     private void initButtons() {
         var playerVariables = entity.getData(BrassworksmissionsModVariables.PLAYER_VARIABLES);
 
-        claimRewardsButton = new IconButton(this.leftPos + 30, this.topPos + 139+12, MissionIcons.I_CLAIM) {
-            @Override
-            public void onClick(double mouseX, double mouseY) {
-                int selectedSlot = missionSelector.getState();
-                playerVariables.SelectedMission = selectedSlot;
-                PacketDistributor.sendToServer(new UpdateSelectedMissionMessage(selectedSlot));
-                PacketDistributor.sendToServer(new UiButtonMessage(0, x, y, (int) z, selectedSlot));
-            }
-        };
+        claimRewardsButton = new IconButton(this.leftPos + 30, this.topPos + 139+12, MissionIcons.I_CLAIM)
+                .withCallback(() -> {
+                    int selectedSlot = missionSelector.getState();
+                    playerVariables.SelectedMission = selectedSlot;
+                    PacketDistributor.sendToServer(new UpdateSelectedMissionMessage(selectedSlot));
+                    PacketDistributor.sendToServer(new UiButtonMessage(0, x, y, (int) z, selectedSlot));
+                });
         this.addRenderableWidget(claimRewardsButton);
 
-        closeButton = new IconButton(this.leftPos + 167, this.topPos + 139+12, AllIcons.I_CONFIRM) {
-            @Override
-            public void onClick(double mouseX, double mouseY) {
-                int selectedSlot = missionSelector.getState();
-                playerVariables.SelectedMission = selectedSlot;
-                PacketDistributor.sendToServer(new UpdateSelectedMissionMessage(selectedSlot));
-                UiScreen.this.minecraft.player.closeContainer();
-            }
-        };
+        closeButton = new IconButton(this.leftPos + 167, this.topPos + 139+12, AllIcons.I_CONFIRM)
+                .withCallback(() -> {
+                    int selectedSlot = missionSelector.getState();
+                    playerVariables.SelectedMission = selectedSlot;
+                    PacketDistributor.sendToServer(new UpdateSelectedMissionMessage(selectedSlot));
+                    UiScreen.this.minecraft.player.closeContainer();
+                });
         this.addRenderableWidget(closeButton);
 
-        rerollButton = new CustomIconButton(this.leftPos + 124, this.topPos + 102+12, AllIcons.I_REFRESH) {
-            @Override
-            public void onClick(double mouseX, double mouseY) {
-                int selectedSlot = missionSelector.getState();
-                playerVariables.SelectedMission = selectedSlot;
-                PacketDistributor.sendToServer(new UpdateSelectedMissionMessage(selectedSlot));
-                PacketDistributor.sendToServer(new UiButtonMessage(2, x, y, (int) z, selectedSlot));
-            }
-        };
+        rerollButton = new CustomIconButton(this.leftPos + 124, this.topPos + 102+12, AllIcons.I_REFRESH)
+                .withCallback(() -> {
+                    int selectedSlot = missionSelector.getState();
+                    playerVariables.SelectedMission = selectedSlot;
+                    PacketDistributor.sendToServer(new UpdateSelectedMissionMessage(selectedSlot));
+                    PacketDistributor.sendToServer(new UiButtonMessage(2, x, y, (int) z, selectedSlot));
+                });
         this.addRenderableWidget(rerollButton);
 
-        trackButton = new CustomIconButton(this.leftPos + 145, this.topPos + 102+12, AllIcons.I_WHITELIST) {
-            @Override
-            public void onClick(double mouseX, double mouseY) {
-                int selectedSlot = missionSelector.getState();
-                playerVariables.SelectedMission = selectedSlot;
-                PacketDistributor.sendToServer(new UpdateSelectedMissionMessage(selectedSlot));
-                PacketDistributor.sendToServer(new UiButtonMessage(3, x, y, (int) z, selectedSlot));
-            }
-        };
+        trackButton = new CustomIconButton(this.leftPos + 145, this.topPos + 102+12, AllIcons.I_WHITELIST)
+                .withCallback(() -> {
+                    int selectedSlot = missionSelector.getState();
+                    playerVariables.SelectedMission = selectedSlot;
+                    PacketDistributor.sendToServer(new UpdateSelectedMissionMessage(selectedSlot));
+                    PacketDistributor.sendToServer(new UiButtonMessage(3, x, y, (int) z, selectedSlot));
+                });
         this.addRenderableWidget(trackButton);
 
         trackingIndicator = new Indicator(this.leftPos + 145, this.topPos + 96+12, Component.empty());
@@ -470,3 +462,4 @@ public class UiScreen extends AbstractContainerScreen<UiMenu> {
         }
     }
 }
+
