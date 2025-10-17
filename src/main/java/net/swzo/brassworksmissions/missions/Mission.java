@@ -27,9 +27,18 @@ public class Mission {
 
     public ActiveMission createInstance(RandomSource random) {
 
+        if (titles.isEmpty()) {
+            BrassworksmissionsMod.LOGGER.error("Mission '{}' has no titles defined. Skipping instance creation.", id);
+            return null;
+        }
         String title = titles.get(random.nextInt(titles.size()));
 
-        int reqAmount = requirement.minAmount + random.nextInt(requirement.maxAmount - requirement.minAmount + 1);
+        int reqBound = requirement.maxAmount - requirement.minAmount + 1;
+        if (reqBound <= 0) {
+            BrassworksmissionsMod.LOGGER.error("Mission '{}' has invalid requirement amounts (min > max). Skipping instance creation.", id);
+            return null;
+        }
+        int reqAmount = requirement.minAmount + random.nextInt(reqBound);
 
         String selectedItemName = null;
         if (requirement.item instanceof String) {
@@ -37,9 +46,11 @@ public class Mission {
         } else if (requirement.item instanceof List) {
             @SuppressWarnings("unchecked")
             List<String> items = (List<String>) requirement.item;
-            if (!items.isEmpty()) {
-                selectedItemName = items.get(random.nextInt(items.size()));
+            if (items.isEmpty()) {
+                BrassworksmissionsMod.LOGGER.error("Mission '{}' has an empty item list for its requirement. Skipping instance creation.", id);
+                return null; // Return null to prevent a crash
             }
+            selectedItemName = items.get(random.nextInt(items.size()));
         }
 
         ItemStack reqStack = Optional.ofNullable(selectedItemName)
@@ -49,7 +60,17 @@ public class Mission {
                 .orElse(ItemStack.EMPTY);
         if(!reqStack.isEmpty()) reqStack.setCount(1);
 
-        int rewardAmount = reward.minAmount + random.nextInt(reward.maxAmount - reward.minAmount + 1);
+        if (reqStack.isEmpty() && selectedItemName != null) {
+            BrassworksmissionsMod.LOGGER.error("Mission '{}' requires an invalid or unknown item: {}. Skipping instance creation.", id, selectedItemName);
+            return null;
+        }
+
+        int rewardBound = reward.maxAmount - reward.minAmount + 1;
+        if (rewardBound <= 0) {
+            BrassworksmissionsMod.LOGGER.error("Mission '{}' has invalid reward amounts (min > max). Skipping instance creation.", id);
+            return null;
+        }
+        int rewardAmount = reward.minAmount + random.nextInt(rewardBound);
         ItemStack rewardStack = BrassworksmissionsMod.getRewardManager().getRewardItem();
         rewardStack.setCount(rewardAmount);
 
