@@ -6,12 +6,12 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 
 public class ActiveMission {
-    private String missionType;
-    private String title;
-    private ItemStack requirementItemStack;
-    private int requiredAmount;
-    private String requirementType;
-    private ItemStack rewardItemStack;
+    private final String missionType;
+    private final String title;
+    private final ItemStack requirementItemStack;
+    private final int requiredAmount;
+    private final String requirementType;
+    private final ItemStack rewardItemStack;
     private int progress;
     private boolean claimed;
 
@@ -26,7 +26,14 @@ public class ActiveMission {
         this.claimed = false;
     }
 
-    private ActiveMission() {}
+    private ActiveMission() {
+        this.missionType = "";
+        this.title = "";
+        this.requirementItemStack = ItemStack.EMPTY;
+        this.requiredAmount = 0;
+        this.requirementType = "";
+        this.rewardItemStack = ItemStack.EMPTY;
+    }
 
     public String getTitle() { return title; }
     public int getProgress() { return progress; }
@@ -72,25 +79,27 @@ public class ActiveMission {
     }
 
     public static ActiveMission deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
-        ActiveMission mission = new ActiveMission();
-        mission.missionType = nbt.getString("missionType");
-        mission.title = nbt.getString("title");
-        if (nbt.contains("requirementItem")) {
-            mission.requirementItemStack = ItemStack.parse(provider, nbt.getCompound("requirementItem")).orElse(ItemStack.EMPTY);
-        } else {
-            mission.requirementItemStack = ItemStack.EMPTY;
-        }
-        mission.requiredAmount = nbt.getInt("requiredAmount");
+        ActiveMission mission = new ActiveMission(
+            nbt.getString("missionType"),
+            nbt.getString("title"),
+            ItemStack.parse(provider, nbt.getCompound("requirementItem")).orElse(ItemStack.EMPTY),
+            nbt.getInt("requiredAmount"),
+            getRequirementTypeFromNBT(nbt),
+            ItemStack.parse(provider, nbt.getCompound("rewardItem")).orElse(ItemStack.EMPTY)
+        );
 
-        if (nbt.contains("requirementType", Tag.TAG_STRING)) {
-            mission.requirementType = nbt.getString("requirementType");
-        } else if (nbt.contains("isItemRequirement")) {
-            mission.requirementType = nbt.getBoolean("isItemRequirement") ? "item" : "block";
-        }
-
-        mission.rewardItemStack = ItemStack.parse(provider, nbt.getCompound("rewardItem")).orElse(ItemStack.EMPTY);
         mission.progress = nbt.getInt("progress");
         mission.claimed = nbt.getBoolean("claimed");
         return mission;
+    }
+
+    private static String getRequirementTypeFromNBT(CompoundTag nbt) {
+        if (nbt.contains("requirementType", Tag.TAG_STRING)) {
+            return nbt.getString("requirementType");
+        }
+        if (nbt.contains("isItemRequirement")) {
+            return nbt.getBoolean("isItemRequirement") ? "item" : "block";
+        }
+        return "";
     }
 }

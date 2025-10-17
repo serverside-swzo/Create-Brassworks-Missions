@@ -7,6 +7,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.swzo.brassworksmissions.BrassworksmissionsMod;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,12 +26,30 @@ public class Mission {
     public String getId() { return id; }
     public double getWeight() { return weight; }
 
+    @Nullable
     public ActiveMission createInstance(RandomSource random) {
 
-        if (titles.isEmpty()) {
+        if (id == null || id.isBlank()) {
+            BrassworksmissionsMod.LOGGER.error("A mission in the JSON files is missing its 'id'. Skipping instance creation.");
+            return null;
+        }
+        if (titles == null || titles.isEmpty()) {
             BrassworksmissionsMod.LOGGER.error("Mission '{}' has no titles defined. Skipping instance creation.", id);
             return null;
         }
+        if (requirement == null) {
+            BrassworksmissionsMod.LOGGER.error("Mission '{}' is missing the entire 'requirement' block. Skipping instance creation.", id);
+            return null;
+        }
+        if (requirement.item == null) {
+            BrassworksmissionsMod.LOGGER.error("Mission '{}' is missing the 'item' field in its requirement. Skipping instance creation.", id);
+            return null;
+        }
+        if (reward == null) {
+            BrassworksmissionsMod.LOGGER.error("Mission '{}' is missing the entire 'reward' block. Skipping instance creation.", id);
+            return null;
+        }
+
         String title = titles.get(random.nextInt(titles.size()));
 
         int reqBound = requirement.maxAmount - requirement.minAmount + 1;
@@ -43,18 +62,15 @@ public class Mission {
         String selectedItemName = null;
         if (requirement.item instanceof String) {
             selectedItemName = (String) requirement.item;
-        } else if (requirement.item instanceof List) {
-            @SuppressWarnings("unchecked")
-            List<String> items = (List<String>) requirement.item;
-            if (items.isEmpty()) {
-                BrassworksmissionsMod.LOGGER.error("Mission '{}' has an empty item list for its requirement. Skipping instance creation.", id);
-                return null; // Return null to prevent a crash
+        } else if (requirement.item instanceof List<?> list && !list.isEmpty()) {
+            Object randomElement = list.get(random.nextInt(list.size()));
+            if (randomElement instanceof String) {
+                selectedItemName = (String) randomElement;
             }
-            selectedItemName = items.get(random.nextInt(items.size()));
         }
 
         ItemStack reqStack = Optional.ofNullable(selectedItemName)
-                .map(ResourceLocation::parse)
+                .map(ResourceLocation::tryParse)
                 .map(BuiltInRegistries.ITEM::get)
                 .map(ItemStack::new)
                 .orElse(ItemStack.EMPTY);
@@ -72,6 +88,10 @@ public class Mission {
         }
         int rewardAmount = reward.minAmount + random.nextInt(rewardBound);
         ItemStack rewardStack = BrassworksmissionsMod.getRewardManager().getRewardItem();
+        if (rewardStack == null || rewardStack.isEmpty()) {
+            BrassworksmissionsMod.LOGGER.error("The global Reward Manager provided a null or empty reward item. Aborting mission creation for '{}'.", id);
+            return null;
+        }
         rewardStack.setCount(rewardAmount);
 
         return new ActiveMission(id, title, reqStack, reqAmount, requirement.requirementType, rewardStack);

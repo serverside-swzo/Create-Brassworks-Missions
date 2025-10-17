@@ -6,20 +6,19 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.swzo.brassworksmissions.missions.ActiveMission;
-import net.swzo.brassworksmissions.missions.IMissionType;
-import net.swzo.brassworksmissions.missions.MissionRegistry;
+import net.swzo.brassworksmissions.missions.*;
 import net.swzo.brassworksmissions.missions.types.create.CreateMissionType;
 import net.swzo.brassworksmissions.network.BrassworksmissionsModVariables;
 
+import javax.annotation.Nullable;
 public class MixinUtils {
 
     public static <T extends CreateMissionType<?>> void handleMixinMissionItem(BlockEntity be, Class<T> missionClass, ItemStack output) {
-        Level level = be.getLevel();
-        if (level == null || level.isClientSide() || output.isEmpty()) {
+        if (be == null || be.getLevel() == null || be.getLevel().isClientSide() || output == null || output.isEmpty()) {
             return;
         }
 
+        Level level = be.getLevel();
         BlockPos worldPosition = be.getBlockPos();
         Player player = getClosestPlayer(level, worldPosition);
 
@@ -27,14 +26,23 @@ public class MixinUtils {
             return;
         }
 
-        var missionsCapability = serverPlayer.getData(BrassworksmissionsModVariables.PLAYER_VARIABLES);
-        var missions = missionsCapability.missionData.getMissions();
+        PlayerMissionData missionData = MissionController.getMissionData(serverPlayer);
+        if (missionData == null) {
+            return;
+        }
+
         boolean needsSync = false;
 
-        for (ActiveMission mission : missions) {
+        for (int i = 0; i < PlayerMissionData.MISSION_SLOTS; i++) {
+            ActiveMission mission = missionData.getMission(i);
+
+            if (mission == null || mission.isComplete()) {
+                continue;
+            }
+
             IMissionType type = MissionRegistry.getMissionType(mission.getMissionType());
 
-            if (!mission.isComplete() && missionClass.isInstance(type)) {
+            if (type != null && missionClass.isInstance(type)) {
                 T missionType = missionClass.cast(type);
                 if (missionType.check(output, mission)) {
                     needsSync = true;
@@ -43,12 +51,12 @@ public class MixinUtils {
         }
 
         if (needsSync) {
-            missionsCapability.syncPlayerVariables(serverPlayer);
+            serverPlayer.getData(BrassworksmissionsModVariables.PLAYER_VARIABLES).syncPlayerVariables(serverPlayer);
         }
     }
 
     public static <T extends CreateMissionType<?>> void handlePlayerMissionIncrement(Player player, Class<T> missionClass, ItemStack itemStack) {
-        if (player == null || player.level().isClientSide() || itemStack.isEmpty()) {
+        if (player == null || player.level() == null || player.level().isClientSide() || itemStack == null || itemStack.isEmpty()) {
             return;
         }
 
@@ -56,14 +64,23 @@ public class MixinUtils {
             return;
         }
 
-        var missionsCapability = serverPlayer.getData(BrassworksmissionsModVariables.PLAYER_VARIABLES);
-        var missions = missionsCapability.missionData.getMissions();
+        PlayerMissionData missionData = MissionController.getMissionData(serverPlayer);
+        if (missionData == null) {
+            return;
+        }
+
         boolean needsSync = false;
 
-        for (ActiveMission mission : missions) {
+        for (int i = 0; i < PlayerMissionData.MISSION_SLOTS; i++) {
+            ActiveMission mission = missionData.getMission(i);
+
+            if (mission == null || mission.isComplete()) {
+                continue;
+            }
+
             IMissionType type = MissionRegistry.getMissionType(mission.getMissionType());
 
-            if (!mission.isComplete() && missionClass.isInstance(type)) {
+            if (type != null && missionClass.isInstance(type)) {
                 T missionType = missionClass.cast(type);
                 if (missionType.check(itemStack, mission)) {
                     needsSync = true;
@@ -72,12 +89,13 @@ public class MixinUtils {
         }
 
         if (needsSync) {
-            missionsCapability.syncPlayerVariables(serverPlayer);
+            serverPlayer.getData(BrassworksmissionsModVariables.PLAYER_VARIABLES).syncPlayerVariables(serverPlayer);
         }
     }
 
+    @Nullable
     public static Player getClosestPlayer(Level level, BlockPos worldPosition) {
-        if (level == null) return null;
+        if (level == null || worldPosition == null) return null;
         return level.getNearestPlayer(
                 worldPosition.getX() + 0.5,
                 worldPosition.getY() + 0.5,
