@@ -1,3 +1,3 @@
 ### Fixed
 
-* Fixed bug with buttons and icons in the missions menu not working when using a proxy.
+* Fixed a server crash that occurred when generating missions for a player if a mission was configured with invalid data.
