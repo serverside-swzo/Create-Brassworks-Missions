@@ -30,9 +30,13 @@ public class MissionController {
     );
 
 
-    @Nullable
+
     public static PlayerMissionData getMissionData(Player player) {
-        return player.getData(BrassworksmissionsModVariables.PLAYER_VARIABLES).missionData;
+        BrassworksmissionsModVariables.PlayerVariables playerVariables = player.getData(BrassworksmissionsModVariables.PLAYER_VARIABLES);
+        if (playerVariables.missionData == null) {
+            playerVariables.missionData = new PlayerMissionData();
+        }
+        return playerVariables.missionData;
     }
 
     @Nullable
