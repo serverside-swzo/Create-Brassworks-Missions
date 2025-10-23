@@ -3,6 +3,12 @@
 **Create: Brassworks Missions** is an addon for [Create: Numismatics](https://modrinth.com/mod/create-numismatics) that introduces a fully data-driven missions system for **Minecraft 1.21.1**.  
 Originally made for the [**Brassworks SMP**](https://modrinth.com/modpack/brassworks-smp-modpack), but available for anyone to use.
 
+## License
+
+This project is licensed under the [MIT License](./LICENSE).
+While credit is **not required**, giving **acknowledgment to swzo** when forking or reusing parts of this project is always appreciated.
+Contributions, suggestions, and improvements are welcome, feel free to open a pull request or start a discussion!
+
 ## Features
 - Track missions directly on your HUD.  
 - Clean, Create-style UI.  
