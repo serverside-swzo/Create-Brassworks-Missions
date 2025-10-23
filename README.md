@@ -27,7 +27,7 @@ Custom missions are stored in datapacks. Place your mission definitions in:
 data/brassworksmissions/missions/missions.json
 ```
 
-The mod ships with a built-in datapack containing examples.  
+An example datapack can be found here [Example Datapack](https://github.com/serverside-swzo/Create-Brassworks-Missions/blob/master/brassworks_missions_example_datapack/brassworks_missions_example.zip), and a guide for the datapacks contents can be found below
 
 ### Example JSON
 data/brassworksmissions/missions/missions.json
