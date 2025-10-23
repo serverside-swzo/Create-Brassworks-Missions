@@ -30,6 +30,7 @@ data/brassworksmissions/missions/missions.json
 The mod ships with a built-in datapack containing examples.  
 
 ### Example JSON
+data/brassworksmissions/missions/missions.json
 ```json
 {
   "id": "brassworksmissions:crush_item",
@@ -46,15 +47,17 @@ The mod ships with a built-in datapack containing examples.
     "maxAmount": 256
   },
   "reward": {
-    "item": "numismatics:spur",
     "minAmount": 8,
     "maxAmount": 16
   }
 }
 ```
-
-## Requirements
-- [Create: Numismatics](https://modrinth.com/mod/create-numismatics)  
+data/brassworksmissions/missions/missions_reward.json
+```json
+{
+  "item": "numismatics:spur" //This can be any item, this dictates what the reward item for the missions will be
+}
+```
 
 ## Notes
 - Works in both singleplayer and multiplayer.  
