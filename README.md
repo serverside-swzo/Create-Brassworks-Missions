@@ -1,4 +1,13 @@
 # Create: Brassworks Missions
+[![Modrinth](https://wsrv.nl/?url=https%3A%2F%2Fcdn.bypixel.dev%2Fraw%2F4dlsHJ.png&n=-1)](https://modrinth.com/mod/create-brassworks-missions)
+[![Curseforge](https://i.ibb.co/F4MtFnv7/cozy-64h.png)](https://www.curseforge.com/minecraft/mc-mods/create-brassworks-missions)
+[![Github](https://i.ibb.co/DPnZdBK5/41dfe80a399c0c8466f8cecc9f35048de5066e11-1.png)](https://github.com/Brassworks-smp/Create-Brassworks-Missions)
+[![Discord](https://wsrv.nl/?url=https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/social/discord-plural_vector.svg&h=64)](https://discord.com/invite/nDhkgzAPR2)
+
+[![CodeFactor](https://www.codefactor.io/repository/github/brassworks-smp/create-brassworks-missions/badge)](https://www.codefactor.io/repository/github/brassworks-smp/create-brassworks-missions)
+[![GitHub issues](https://img.shields.io/github/issues/Brassworks-smp/Create-Brassworks-Missions.svg)](https://github.com/Brassworks-smp/Create-Brassworks-Missions/issues)
+[![GitHub commits (total)](https://img.shields.io/github/commit-activity/t/Brassworks-smp/Create-Brassworks-Missions/master.svg)](https://github.com/Brassworks-smp/Create-Brassworks-Missions/commits)
+![Lines of Code](https://img.shields.io/endpoint?url=https://ghloc.vercel.app/api/Brassworks-smp/Create-Brassworks-Missions/badge&color=2ecc71)
 
 **Create: Brassworks Missions** is an addon for [Create: Numismatics](https://modrinth.com/mod/create-numismatics) that introduces a fully data-driven missions system for **Minecraft 1.21.1**.  
 Originally made for the [**Brassworks SMP**](https://modrinth.com/modpack/brassworks-smp-modpack), but available for anyone to use.
