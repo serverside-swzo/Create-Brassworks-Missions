@@ -17,9 +17,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.swzo.brassworksmissions.BrassworksmissionsMod;
 import net.swzo.brassworksmissions.client.gui.widget.CustomIconButton;
 import net.swzo.brassworksmissions.init.KeybindingInit;
 import net.swzo.brassworksmissions.missions.ActiveMission;
@@ -29,12 +27,12 @@ import net.swzo.brassworksmissions.network.BrassworksmissionsModVariables;
 import net.swzo.brassworksmissions.network.UiButtonMessage;
 import net.swzo.brassworksmissions.network.UpdateSelectedMissionMessage;
 import net.swzo.brassworksmissions.world.inventory.UiMenu;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UiScreen extends AbstractContainerScreen<UiMenu> {
-    private final Level world;
     private final int x, y, z;
     private final Player entity;
 
@@ -57,7 +55,6 @@ public class UiScreen extends AbstractContainerScreen<UiMenu> {
 
     public UiScreen(UiMenu container, Inventory inventory, Component text) {
         super(container, inventory, text);
-        this.world = container.world;
         this.x = container.x;
         this.y = container.y;
         this.z = container.z;
@@ -67,7 +64,7 @@ public class UiScreen extends AbstractContainerScreen<UiMenu> {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
 
         Component selectedPrefix = Component.translatable("gui.brassworksmissions.ui.selected_prefix")
@@ -280,8 +277,13 @@ public class UiScreen extends AbstractContainerScreen<UiMenu> {
         var playerVariables = entity.getData(BrassworksmissionsModVariables.PLAYER_VARIABLES);
         ActiveMission mission = playerVariables.missionData.getMission(idx);
 
-        ItemStack missionIcon = new ItemStack(mission.getRequirementItemStack().getItem(), 1);
-        guiGraphics.renderItem(missionIcon, this.leftPos + 25, this.topPos + 43);
+        ItemStack missionIcon = null;
+        if (mission != null) {
+            missionIcon = new ItemStack(mission.getRequirementItemStack().getItem(), 1);
+        }
+        if (missionIcon != null) {
+            guiGraphics.renderItem(missionIcon, this.leftPos + 25, this.topPos + 43);
+        }
 
         ItemStack allRewardsIcon = new ItemStack(rewardStack.getItem(), MissionController.getTotalClaimableItemCount(entity));
         int allRewardsX = this.leftPos + 10;
@@ -302,7 +304,11 @@ public class UiScreen extends AbstractContainerScreen<UiMenu> {
     @Override
     public boolean keyPressed(int key, int b, int c) {
         if (key == 256 || key == KeybindingInit.OPEN_MISSIONS_UI_KEY.getKey().getValue()) {
-            this.minecraft.player.closeContainer();
+            if (this.minecraft != null) {
+                if (this.minecraft.player != null) {
+                    this.minecraft.player.closeContainer();
+                }
+            }
             int selectedSlot = missionSelector.getState();
 
             entity.getData(BrassworksmissionsModVariables.PLAYER_VARIABLES).SelectedMission = selectedSlot;
@@ -317,7 +323,7 @@ public class UiScreen extends AbstractContainerScreen<UiMenu> {
     }
 
     @Override
-    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+    protected void renderLabels(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY) {
 
     }
 
@@ -376,7 +382,11 @@ public class UiScreen extends AbstractContainerScreen<UiMenu> {
                     int selectedSlot = missionSelector.getState();
                     playerVariables.SelectedMission = selectedSlot;
                     PacketDistributor.sendToServer(new UpdateSelectedMissionMessage(selectedSlot));
-                    UiScreen.this.minecraft.player.closeContainer();
+                    if (UiScreen.this.minecraft != null) {
+                        if (UiScreen.this.minecraft.player != null) {
+                            UiScreen.this.minecraft.player.closeContainer();
+                        }
+                    }
                 });
         this.addRenderableWidget(closeButton);
 
@@ -413,11 +423,16 @@ public class UiScreen extends AbstractContainerScreen<UiMenu> {
 
             claimRewardsButton.active = MissionController.getTotalClaimableItemCount(entity) >= 1;
 
-            rerollButton.active = (playerVariables.reRollAmount * 2 <= 32) && !mission.isComplete();
+            if (mission != null) {
+                rerollButton.active = (playerVariables.reRollAmount * 2 <= 32) && !mission.isComplete();
+            }
 
             if (trackingIndicator != null && trackButton != null) {
                 boolean isTracked = playerVariables.trackedMissions.contains(idx);
-                boolean isComplete = mission.isComplete();
+                boolean isComplete = false;
+                if (mission != null) {
+                    isComplete = mission.isComplete();
+                }
 
                 if (isComplete && !isTracked) {
 
@@ -440,9 +455,8 @@ public class UiScreen extends AbstractContainerScreen<UiMenu> {
 
                 descriptionComponent = MissionUIHelper.getMissionDescription(mission);
 
-                Component progressPrefix = Component.translatable("gui.brassworksmissions.ui.progress")
+                progressTextLabel.text = Component.translatable("gui.brassworksmissions.ui.progress")
                         .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(MissionUIHelper.PROGRESS_TEXT_COLOR)));
-                progressTextLabel.text = progressPrefix;
 
                 progressLabel.text = MissionUIHelper.getFormattedProgress(mission, null);
 

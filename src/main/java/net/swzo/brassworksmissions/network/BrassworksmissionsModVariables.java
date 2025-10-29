@@ -25,17 +25,19 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import net.swzo.brassworksmissions.BrassworksmissionsMod;
 import net.swzo.brassworksmissions.missions.ActiveMission;
 import net.swzo.brassworksmissions.missions.PlayerMissionData;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @EventBusSubscriber
 public class BrassworksmissionsModVariables {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, BrassworksmissionsMod.MODID);
-    public static final Supplier<AttachmentType<PlayerVariables>> PLAYER_VARIABLES = ATTACHMENT_TYPES.register("player_variables", () -> AttachmentType.serializable(() -> new PlayerVariables()).build());
+    public static final Supplier<AttachmentType<PlayerVariables>> PLAYER_VARIABLES = ATTACHMENT_TYPES.register("player_variables", () -> AttachmentType.serializable(PlayerVariables::new).build());
 
     @SubscribeEvent
     public static void init(FMLCommonSetupEvent event) {
@@ -73,9 +75,6 @@ public class BrassworksmissionsModVariables {
             clone.hasmissiondata = original.hasmissiondata;
             clone.missionData = original.missionData;
             clone.trackedMissions = new ArrayList<>(original.trackedMissions);
-            if (!event.isWasDeath()) {
-
-            }
             event.getEntity().setData(PLAYER_VARIABLES, clone);
         }
     }
@@ -120,7 +119,7 @@ public class BrassworksmissionsModVariables {
         }
 
         @Override
-        public CompoundTag serializeNBT(HolderLookup.Provider lookupProvider) {
+        public CompoundTag serializeNBT(HolderLookup.@NotNull Provider lookupProvider) {
             CompoundTag nbt = new CompoundTag();
             nbt.putLong("lastWeeklyResetTime", lastWeeklyResetTime);
             nbt.putDouble("SelectedMission", SelectedMission);
@@ -132,7 +131,7 @@ public class BrassworksmissionsModVariables {
         }
 
         @Override
-        public void deserializeNBT(HolderLookup.Provider lookupProvider, CompoundTag nbt) {
+        public void deserializeNBT(HolderLookup.@NotNull Provider lookupProvider, CompoundTag nbt) {
             lastWeeklyResetTime = nbt.getLong("lastWeeklyResetTime");
             SelectedMission = nbt.getDouble("SelectedMission");
             reRollAmount = nbt.getInt("reRollAmount");
@@ -157,12 +156,12 @@ public class BrassworksmissionsModVariables {
         public static final StreamCodec<RegistryFriendlyByteBuf, PlayerVariablesSyncMessage> STREAM_CODEC = StreamCodec
                 .of((RegistryFriendlyByteBuf buffer, PlayerVariablesSyncMessage message) -> buffer.writeNbt(message.data().serializeNBT(buffer.registryAccess())), (RegistryFriendlyByteBuf buffer) -> {
                     PlayerVariablesSyncMessage message = new PlayerVariablesSyncMessage(new PlayerVariables());
-                    message.data.deserializeNBT(buffer.registryAccess(), buffer.readNbt());
+                    message.data.deserializeNBT(buffer.registryAccess(), Objects.requireNonNull(buffer.readNbt()));
                     return message;
                 });
 
         @Override
-        public Type<PlayerVariablesSyncMessage> type() {
+        public @NotNull Type<PlayerVariablesSyncMessage> type() {
             return TYPE;
         }
 

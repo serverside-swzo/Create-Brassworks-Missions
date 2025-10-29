@@ -37,7 +37,7 @@ public class RewardManager extends SimpleJsonResourceReloadListener {
             try {
                 RewardConfig config = GSON.fromJson(rewardJson, RewardConfig.class);
                 if (config != null && config.getItem() != null) {
-                    Item rewardItem = Optional.ofNullable(BuiltInRegistries.ITEM.get(ResourceLocation.parse(config.getItem()))).orElse(Items.EMERALD);
+                    Item rewardItem = Optional.of(BuiltInRegistries.ITEM.get(ResourceLocation.parse(config.getItem()))).orElse(Items.EMERALD);
                     this.rewardItemStack = new ItemStack(rewardItem);
                     BrassworksmissionsMod.LOGGER.info("Loaded mission reward item: {}", config.getItem());
                 } else {

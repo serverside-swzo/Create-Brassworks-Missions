@@ -17,7 +17,7 @@ public class ServerboundChainConveyorRidingPacketMixin {
     @Shadow
     private boolean stop;
 
-    @Inject(method = "applySettings", at = @At("HEAD"))
+    @Inject(method = "applySettings*", at = @At("HEAD"))
     private void onApplySettings(ServerPlayer sender, ChainConveyorBlockEntity be, CallbackInfo ci) {
         if (sender != null && !this.stop) {
             DistanceManager.track(sender, TravelByChainConveyorMissionType.ID, 20);

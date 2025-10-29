@@ -11,6 +11,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.swzo.brassworksmissions.BrassworksmissionsMod;
 import net.swzo.brassworksmissions.util.UiUtils;
+import org.jetbrains.annotations.NotNull;
 
 @EventBusSubscriber
 public record OpenMissionsUIMessage() implements CustomPacketPayload {
@@ -27,7 +28,7 @@ public record OpenMissionsUIMessage() implements CustomPacketPayload {
     }
 
     @Override
-    public Type<? extends CustomPacketPayload> type() {
+    public @NotNull Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
 

@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.swzo.brassworksmissions.BrassworksmissionsMod;
+import org.jetbrains.annotations.NotNull;
 
 public record UpdateSelectedMissionMessage(int selectedSlot) implements CustomPacketPayload {
 
@@ -20,7 +21,7 @@ public record UpdateSelectedMissionMessage(int selectedSlot) implements CustomPa
     );
 
     @Override
-    public Type<UpdateSelectedMissionMessage> type() {
+    public @NotNull Type<UpdateSelectedMissionMessage> type() {
         return TYPE;
     }
 

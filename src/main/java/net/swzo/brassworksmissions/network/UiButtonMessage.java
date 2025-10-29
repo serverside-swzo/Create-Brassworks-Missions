@@ -18,6 +18,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.swzo.brassworksmissions.BrassworksmissionsMod;
 import net.swzo.brassworksmissions.missions.MissionController;
 import net.swzo.brassworksmissions.util.UiUtils;
+import org.jetbrains.annotations.NotNull;
 
 @EventBusSubscriber
 public record UiButtonMessage(int buttonID, int x, int y, int z, int slot) implements CustomPacketPayload {
@@ -44,7 +45,7 @@ public record UiButtonMessage(int buttonID, int x, int y, int z, int slot) imple
     );
 
     @Override
-    public Type<UiButtonMessage> type() {
+    public @NotNull Type<UiButtonMessage> type() {
         return TYPE;
     }
 

@@ -12,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.LevelAccessor;
 import net.swzo.brassworksmissions.world.inventory.UiMenu;
+import org.jetbrains.annotations.NotNull;
 
 public class UiUtils {
 	public static void openUi(LevelAccessor world, double x, double y, double z, Entity entity) {
@@ -21,7 +22,7 @@ public class UiUtils {
 			BlockPos blockPos = BlockPos.containing(x, y, z);
 			serverPlayer.openMenu(new MenuProvider() {
 				@Override
-				public Component getDisplayName() {
+				public @NotNull Component getDisplayName() {
 					return Component.literal("Ui");
 				}
 
@@ -31,7 +32,7 @@ public class UiUtils {
 				}
 
 				@Override
-				public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+				public AbstractContainerMenu createMenu(int id, @NotNull Inventory inventory, @NotNull Player player) {
 					return new UiMenu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(blockPos));
 				}
 			}, blockPos);
